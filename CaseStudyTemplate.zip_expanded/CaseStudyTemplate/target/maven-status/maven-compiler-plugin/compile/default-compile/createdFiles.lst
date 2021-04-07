@@ -1,0 +1,5 @@
+com\CaseStudyTemplate\config\DataConfig.class
+com\CaseStudyTemplate\controller\TestController.class
+com\CaseStudyTemplate\service\StudentService.class
+com\CaseStudyTemplate\models\Student.class
+com\CaseStudyTemplate\repo\StudentRepository.class
