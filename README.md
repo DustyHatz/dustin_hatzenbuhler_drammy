@@ -1,4 +1,4 @@
-# dustin_hatzenbuhler_drammy
+# Drammy
 TekSystems Case Study
 
-Hello, myself.
+Had to create new repo for this project...READEME is TODO at the moment!
