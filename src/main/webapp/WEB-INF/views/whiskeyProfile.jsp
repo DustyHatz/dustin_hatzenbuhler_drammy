@@ -34,41 +34,65 @@
 <body>
 
 	<!-- Navigation -->
+	<!-- Navigation -->
 	<nav class="navbar navbar-light bg-dark static-top">
 	
 		<div class="container">
 			<a class="navbar-brand text-light" href="/Drammy">Drammy</a>
-			<a class="btn text-white custom-btn" href="/Drammy/signIn">Sign In</a> 
-			<a class="btn text-white custom-btn" href="/Drammy/register">Create Account</a>
+			<a class="btn text-white custom-btn" href="/Drammy/logOut">Log Out</a> 
 		</div>
 
 	</nav>
 
 	<!-- Masthead -->
-	<header class="masthead text-white text-left" style="background-image: url('<%=request.getContextPath()%>/resources/images/tasting_glass.jpeg');">
+	<header class="masthead text-white masthead-image" style="background-image: url('<%=request.getContextPath()%>/resources/images/tasting_glass.jpeg');">
 		<div class="overlay"></div>
-		<div class="container">
+	    	<div class="container">
+	      	<!-- <h2 class="mb-5">What people are saying...</h2> -->
+	      		<div class="row">
+		        	<div class="col-lg-4">
+		          		<div class="testimonial-item mx-auto mb-5 mb-lg-0">
+		            		<img class="img-fluid rounded-circle mb-3" src="${whiskey.imageUrl}" data-holder-rendered="true" alt="">
+		            		<h5>${whiskey.name}</h5>
+		            		<p class="font-weight-light mb-0">${whiskey.description}</p>
+		          		</div>
+		        	</div>
+		        	<div class="col-lg-6 tasting-notes-container">
+		        		<h3>Tasting Notes</h3>
+		        		<hr>
+		        		<form action="saveNotes" method="POST">
+			        		<div class="tasting-category top">
+			        			<h5>Color</h5>
+			        			<input type="hidden" name="color"> <p contenteditable="true">Color notes...</p>
+			        		</div>
+			        		<div class="tasting-category">
+			        			<h5>Nose</h5>
+			        			<p contenteditable="true">Nose notes...</p>
+			        		</div>
+			        		<div class="tasting-category">
+			        			<h5>Palate</h5>
+			        			<p contenteditable="true">Palate notes...</p>
+			        		</div>
+			        		<div class="tasting-category">
+			        			<h5>Finish</h5>
+			        			<p contenteditable="true">Finish notes...</p>
+			        		</div>
+			        	</form>
+		        	</div>
+		        </div>
+	    	</div>
+	</header>
+  
+  <%-- 		<div class="container">
 			<div class="row">
 				<div class="col-xl-9 mx-auto">
-					<h1 class="mb-5">Welcome ${whiskey.name}</h1>
+					<img class="whiskey-profile-image" alt="${whiskey.name} thumbnail" src="${whiskey.imageUrl}" data-holder-rendered="true">
+					<h1 class="mb-5">${whiskey.name}</h1>
 				</div>
 				<div class="col-md-10 col-lg-8 col-xl-7 mx-left">
-					<form>
-						<div class="form-row">
-							<div class="col-12 col-md-6 mb-2 mb-md-0">
-								<input type="text" class="form-control form-control-lg"
-									placeholder="Search for whiskey...">
-							</div>
-							<div class="col-12 col-md-3">
-								<button type="submit"
-									class="btn btn-block btn-lg text-white submit-btn">Search</button>
-							</div>
-						</div>
-					</form>
 				</div>
 			</div>
-		</div>
-	</header>
+		</div> --%>
 
 
 	<!-- Footer -->

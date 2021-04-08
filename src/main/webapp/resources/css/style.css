@@ -30,6 +30,14 @@ a {
 	object-fit: fill;
 }
 
+.whiskey-profile-image {
+	display: block;
+	width: 35%;
+	margin-left: auto;
+	margin-right: auto;
+	object-fit: contain;
+}
+
 header.masthead {
   position: relative;
   background-color: #343a40;
@@ -55,6 +63,20 @@ header.masthead .overlay {
 	background-size: cover;
 	padding-top: 6rem;
   padding-bottom: 6rem;
+}
+
+.tasting-notes-container h3 {
+	text-align: center;
+}
+
+.tasting-notes-container {
+	
+}
+
+.tasting-category{
+	
+	margin-top: 0px;
+	margin-bottom: 50px;
 }
 
 header.masthead h1 {
