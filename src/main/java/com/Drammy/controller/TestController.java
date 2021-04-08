@@ -39,20 +39,6 @@ public class TestController {
 	public String signIn() {
 		return "signIn";
 	}
-
-	
-//	@RequestMapping("/signInAttempt")
-//	public String signInAttempt2(HttpServletRequest request) {
-//		User user = userService.getUserByUsername(request.getParameter("username"));
-//		String userId = user.getUsername();
-//		request.getSession().setAttribute("loggedInUser", userId);
-//		
-//		if(userId != null) {
-//			return "userProfile";
-//		}else {
-//			return "redirect:/";
-//		}
-//	}
 	
 	@RequestMapping("/logOut")
 	public String logOutHandler(HttpServletRequest request) {
@@ -90,17 +76,24 @@ public class TestController {
 		return mav;
 	}
 	
-	@PostMapping("/createAccount")
+	@RequestMapping(value="/createAccount", method= {RequestMethod.POST, RequestMethod.GET})
 	public ModelAndView createAccountHandler(HttpServletRequest request) {
+		ModelAndView mav = new ModelAndView();
 		
-		ModelAndView mav = new ModelAndView("signIn");
-		User user = new User(
-				request.getParameter("username"),
-				request.getParameter("firstName"),
-				request.getParameter("lastName"),
-				request.getParameter("password"));
-		userService.addUser(user);
-		return mav;
+		if (request.getMethod().equals("POST")) {
+			mav.setViewName("signIn");
+			User user = new User(
+					request.getParameter("username"),
+					request.getParameter("firstName"),
+					request.getParameter("lastName"),
+					request.getParameter("password"));
+			userService.addUser(user);
+			return mav;
+		} else {
+			
+			mav.setViewName("register");
+			return mav;
+		}
 	}
 
 	@RequestMapping(value="/search", method= {RequestMethod.POST, RequestMethod.GET})
@@ -124,7 +117,6 @@ public class TestController {
 			return mav;
 		}
 	}
-	
 	
 	@RequestMapping(value="/saveWhiskey", method= {RequestMethod.POST, RequestMethod.GET})
 	public ModelAndView saveWhiskeyHandler(HttpServletRequest request) {
@@ -171,7 +163,7 @@ public class TestController {
 			return mav;
 		}
 	}
-	
+		
 	@RequestMapping(value="/wantWhiskey", method= {RequestMethod.POST, RequestMethod.GET})
 	public ModelAndView wantWhiskeyHandler(HttpServletRequest request) {
 		ModelAndView mav = new ModelAndView();
