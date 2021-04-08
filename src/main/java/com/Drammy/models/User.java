@@ -21,15 +21,15 @@ public class User {
 	@Column(name = "password", length = 50, nullable = false)
 	private String password;
 	
-	@OneToMany(
+	@ManyToMany(
 			targetEntity = Whiskey.class,
 			cascade = CascadeType.REMOVE,
-			fetch = FetchType.EAGER
+			fetch = FetchType.LAZY
 	)
 	@JoinTable(name = "savedWhiskey")
 	private List<Whiskey> savedWhiskey;
 	
-	@OneToMany(
+	@ManyToMany(
 			targetEntity = Whiskey.class,
 			cascade = CascadeType.REMOVE,
 			fetch = FetchType.LAZY

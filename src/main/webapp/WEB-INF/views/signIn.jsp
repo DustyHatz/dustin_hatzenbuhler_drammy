@@ -77,20 +77,18 @@
             <div class="form-group">
               <label for="userName">Username</label>
               <input type="text" class="form-control" name="username" id="userName" placeholder="Enter username..." required>
-              <div class="invalid-feedback">Please enter a Username
-							</div>
+              <div class="invalid-feedback">Please enter a Username</div>
             </div>
             <div class="form-group">
               <label for="password">Password</label>
               <input type="password" class="form-control" name="password" id="password" placeholder="Enter password..." required>
-              <div class="invalid-feedback">Please enter a Password
-							</div>
+              <div class="invalid-feedback">Please enter a Password</div>
             </div>
             <button type="submit" class="btn text-white submit-btn">Submit</button>
           </form>
           <hr class="btn-light">
           <p>Don't have an account?</p>
-          <a href="/Drammy/createAccount"><button class="btn btn-dark custom-btn">Create Account</button></a>
+          <a href="/Drammy/register"><button class="btn btn-dark custom-btn">Create Account</button></a>
         </div>
       </div>
     </div>

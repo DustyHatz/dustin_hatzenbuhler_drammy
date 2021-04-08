@@ -81,48 +81,34 @@
 						<div class="form-group">
 							<div class="form-row">
 								<div class="form-group col-md-6">
-									<label for="firstName">First Name</label> <input type="text"
-										class="form-control" name="firstName" id="firstName"
-										placeholder="First Name...">
+									<label for="firstName">First Name</label>
+									<input type="text" class="form-control" name="firstName" id="firstName" placeholder="First Name...">
 								</div>
 								<div class="form-group col-md-6">
-									<label for="lastName">Last Name</label> <input type="text"
-										class="form-control" name="lastName" id="lastName" placeholder="Last Name...">
+									<label for="lastName">Last Name</label>
+									<input type="text" class="form-control" name="lastName" id="lastName" placeholder="Last Name...">
 								</div>
 							</div>
-							<label for="userName">Username</label> <input type="text"
-								class="form-control" name="username" id="userName"
-								placeholder="Create username..." required maxlength="20">
-							<div class="invalid-feedback">Please enter a valid Username
-							</div>
-							<small id="usernameHelp" class="form-text text-light">*Limit
-								20 characters</small>
+							<label for="userName">Username</label> <input type="text" class="form-control" name="username" id="userName" placeholder="Create username..." required maxlength="20">
+							<div class="invalid-feedback">Please enter a valid Username</div>
+							<small id="usernameHelp" class="form-text text-light">*Limit 20 characters</small>
 						</div>
 						<div class="form-row">
 							<div class="form-group col-md-6">
-								<label for="password">Create Password</label> <input
-									type="password" class="form-control" name="password" id="password"
-									placeholder="Create password..." required>
-								<div class="invalid-feedback">Please enter a valid
-									password</div>
+								<label for="password">Create Password</label> <input type="password" class="form-control" name="password" id="password" placeholder="Create password..." required>
+								<div class="invalid-feedback">Please enter a valid password</div>
 							</div>
 							<div class="form-group col-md-6">
-								<label for="confirmPassword">Confirm Password</label> <input
-									type="password" class="form-control" name="confirmPassword" id="confirmPassword"
-									placeholder="Re-type password..." required>
+								<label for="confirmPassword">Confirm Password</label> <input type="password" class="form-control" name="confirmPassword" id="confirmPassword" placeholder="Re-type password..." required>
 								<div class="invalid-feedback">Passwords do not match</div>
 							</div>
 						</div>
 						<div class="form-check">
-							<input type="checkbox" class="form-check-input"
-								id="exampleCheck1" required> <label
-								class="form-check-label" for="exampleCheck1">I am at
-								least 21 years of age.</label>
-							<div class="invalid-feedback">Must confirm legal drinking
-								age to proceed</div>
+							<input type="checkbox" class="form-check-input" id="exampleCheck1" required>
+							<label class="form-check-label" for="exampleCheck1">I am at least 21 years of age.</label>
+							<div class="invalid-feedback">Must confirm legal drinking age to proceed</div>
 						</div>
-						<button type="submit" class="btn text-white submit-btn">Create
-							Account</button>
+						<button type="submit" class="btn text-white submit-btn">Create Account</button>
 					</form>
 				</div>
 			</div>

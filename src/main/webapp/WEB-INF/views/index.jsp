@@ -90,10 +90,10 @@
 				<div class="col-lg-6 order-lg-2 text-white showcase-img"
 					style="background-image: url('<%=request.getContextPath()%>/resources/images/pot_still.jpeg');"></div>
 				<div class="col-lg-6 order-lg-1 my-auto showcase-text">
-					<h2>All Scotch is whiskey...</h2>
-					<p class="lead mb-0">...but not all whiskey is Scotch. Scotch
-						is but one variation of whiskey. Other styles of whiskey include,
-						Bourbon, Irish, Canadian, Japenese, and many more!</p>
+					<h2>Is Bourbon whiskey?...</h2>
+					<p class="lead mb-0">Yes, all bourbon is whiskey but not all whiskey is bourbon. Bourbon
+						is but one type of whiskey. Other types of whiskey include,
+						Scotch, Rye, Irish, Japenese, and many more!</p>
 				</div>
 			</div>
 			<div class="row no-gutters">

@@ -21,6 +21,8 @@ import com.Drammy.service.WhiskeyService;
 @Controller
 public class TestController {
 	
+//	User currentUser = new User();
+	
 	@Autowired
 	UserService userService;
 	@Autowired
@@ -72,6 +74,7 @@ public class TestController {
 			mav.addObject("savedWhiskey", user.getSavedWhiskey());
 			mav.addObject("wantedWhiskey", user.getWantedWhiskey());
 			request.getSession().setAttribute("loggedInUser", user.getUsername());
+			//currentUser = user;
 			return mav;
 			
 		} else {
@@ -115,43 +118,77 @@ public class TestController {
 	@PostMapping("/saveWhiskey")
 	public ModelAndView saveWhiskeyHandler(HttpServletRequest request) {
 		
-		// Get logged in user's (username)
-		String loggedUsername = (String) request.getSession().getAttribute("loggedInUser");
-		System.out.println(loggedUsername);
-		User user = userService.getUserByUsername(loggedUsername);
+		ModelAndView mav = new ModelAndView();
+		System.out.println("*----------ModelAndView Created----------*");
 		
-		/*-------------------Save Selected Whiskey-------------------*/
-		int whiskeyId = Integer.parseInt(request.getParameter("whiskeyId"));
-		System.out.println(whiskeyId);
-		Whiskey whiskeyToSave = whiskeyService.getWhiskeyById(whiskeyId);
-		userService.updateSavedWhiskey(loggedUsername, whiskeyToSave);
-		/*-------------------Display Saved Whiskey-------------------*/
-		ModelAndView mav = new ModelAndView("userProfile");
-		mav.addObject(user);
-		mav.addObject("savedWhiskey", user.getSavedWhiskey());
-		mav.addObject("wantedWhiskey", user.getWantedWhiskey());
-		return mav;
+		try {
+			// Get logged in user's (username)
+			String loggedUsername = (String) request.getSession().getAttribute("loggedInUser");
+			System.out.println("*----------"+loggedUsername+"----------*");
+			if(loggedUsername == "") {
+				mav.setViewName("error");
+				return mav;
+			}
+			User user = userService.getUserByUsername(loggedUsername);
+			if(user == null) {
+				// return model and view error, redirect to sign in
+				mav.setViewName("error");
+				return mav;
+			} else {
+				/*-------------------Save Selected Whiskey-------------------*/
+				int whiskeyId = Integer.parseInt(request.getParameter("whiskeyId"));
+				System.out.println("*----------"+whiskeyId+"----------*");
+				Whiskey whiskeyToSave = whiskeyService.getWhiskeyById(whiskeyId);
+				userService.updateSavedWhiskey(loggedUsername, whiskeyToSave);
+				/*-------------------Display Saved Whiskey-------------------*/
+				mav.setViewName("userProfile");
+				mav.addObject(user);
+				mav.addObject("savedWhiskey", user.getSavedWhiskey());
+				mav.addObject("wantedWhiskey", user.getWantedWhiskey());
+				return mav;
+			}
+		} catch(Exception e) {
+			mav.setViewName("signIn");
+			System.out.println(e.getMessage());
+			return mav;
+		}
 	}
 	
 	@PostMapping("/wantWhiskey")
 	public ModelAndView wantWhiskeyHandler(HttpServletRequest request) {
+		ModelAndView mav = new ModelAndView();
+		System.out.println("*----------ModelAndView Created----------*");
 		
-		// Get logged in user's (username)
-		String loggedUsername = (String) request.getSession().getAttribute("loggedInUser");
-		System.out.println(loggedUsername);
-		User user = userService.getUserByUsername(loggedUsername);
-		
-		/*-------------------Save Selected Whiskey-------------------*/
-		int whiskeyId = Integer.parseInt(request.getParameter("whiskeyId"));
-		System.out.println(whiskeyId);
-		Whiskey whiskeyTowant = whiskeyService.getWhiskeyById(whiskeyId);
-		userService.updateWantedWhiskey(loggedUsername, whiskeyTowant);
-		/*-------------------Display Saved Whiskey-------------------*/
-		ModelAndView mav = new ModelAndView("userProfile");
-		mav.addObject(user);
-		mav.addObject("savedWhiskey", user.getSavedWhiskey());
-		mav.addObject("wantedWhiskey", user.getWantedWhiskey());
-		return mav;
+		try {
+			// Get logged in user's (username)
+			String loggedUsername = (String) request.getSession().getAttribute("loggedInUser");
+			System.out.println("*----------"+loggedUsername+"----------*");
+			if(loggedUsername == "") {
+				mav.setViewName("error");
+				return mav;
+			}
+			User user = userService.getUserByUsername(loggedUsername);
+			if(user == null) {
+				// return model and view error, redirect to sign in
+				mav.setViewName("error");
+				return mav;
+			} else {
+				/*-------------------Save Selected Whiskey-------------------*/
+				int whiskeyId = Integer.parseInt(request.getParameter("whiskeyId"));
+				System.out.println("*----------"+whiskeyId+"----------*");
+				Whiskey whiskeyToWant = whiskeyService.getWhiskeyById(whiskeyId);
+				userService.updateWantedWhiskey(loggedUsername, whiskeyToWant);
+				/*-------------------Display Saved Whiskey-------------------*/
+				mav.setViewName("userProfile");
+				mav.addObject(user);
+				mav.addObject("savedWhiskey", user.getSavedWhiskey());
+				mav.addObject("wantedWhiskey", user.getWantedWhiskey());
+				return mav;
+			}
+		} catch(Exception e) {
+			mav.setViewName("signIn");
+			System.out.println(e.getMessage());
+			return mav;
+		}
 	}
-	
 }
