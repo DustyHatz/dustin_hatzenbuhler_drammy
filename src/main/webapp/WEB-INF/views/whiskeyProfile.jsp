@@ -60,28 +60,32 @@
 		        	<div class="col-lg-6 tasting-notes-container">
 		        		<h3>Tasting Notes</h3>
 		        		<hr>
-		        		<form action="saveNotes" method="POST">
-			        		<div class="tasting-category top">
+		        		<form action="saveNotes" method="POST" id="tasting-form">
+ 			        		<div class="tasting-category top">
 			        			<h5>Color</h5>
-			        			<input type="hidden" name="color"> <p contenteditable="true">Color notes...</p>
+			        			<textarea class="form-control tasting-input" name="color" form="tasting-form" rows="2">${whiskey.color}</textarea>
 			        		</div>
 			        		<div class="tasting-category">
 			        			<h5>Nose</h5>
-			        			<p contenteditable="true">Nose notes...</p>
+			        			<textarea class="form-control tasting-input" name="nose" form="tasting-form" rows="2">${whiskey.nose}</textarea>
 			        		</div>
 			        		<div class="tasting-category">
 			        			<h5>Palate</h5>
-			        			<p contenteditable="true">Palate notes...</p>
+			        			<textarea class="form-control tasting-input" name="palate" form="tasting-form" rows="2">${whiskey.palate}</textarea>
 			        		</div>
 			        		<div class="tasting-category">
 			        			<h5>Finish</h5>
-			        			<p contenteditable="true">Finish notes...</p>
+			        			<textarea class="form-control tasting-input" name="finish" form="tasting-form" rows="2">${whiskey.finish}</textarea>
 			        		</div>
+			        		
+			        		<button type="submit" class="btn btn-sm text-white submit-btn">Save</button>
 			        	</form>
 		        	</div>
 		        </div>
 	    	</div>
 	</header>
+	
+	
   
   <%-- 		<div class="container">
 			<div class="row">

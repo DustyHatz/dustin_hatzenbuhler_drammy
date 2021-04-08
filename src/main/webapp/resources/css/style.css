@@ -62,15 +62,23 @@ header.masthead .overlay {
 	background-image: no-repeat center;
 	background-size: cover;
 	padding-top: 6rem;
-  padding-bottom: 6rem;
+  	padding-bottom: 6rem;
 }
 
 .tasting-notes-container h3 {
 	text-align: center;
 }
 
-.tasting-notes-container {
-	
+.tasting-input {
+	background-color: transparent;
+	min-width: fit-content;
+	color: white;
+	border: transparent;
+}
+
+.tasting-input:focus {
+	background-color: transparent;
+	color: white;
 }
 
 .tasting-category{
