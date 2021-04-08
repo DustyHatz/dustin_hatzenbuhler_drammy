@@ -87,7 +87,7 @@
         <tbody>
         	<c:forEach items="${savedWhiskey}" var="whiskey">
 	          <tr>
-	            <td><a href="${whiskey.url}">${whiskey.name}</a></td>
+	            <td><a href="/Drammy/whiskeyProfile/${whiskey.whiskeyId}">${whiskey.name}</a></td>
 	            <td>${whiskey.distillery}</td>
 	            <td>${whiskey.type}</td>
 	          </tr>

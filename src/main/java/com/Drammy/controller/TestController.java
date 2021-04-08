@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -209,4 +210,17 @@ public class TestController {
 			return mav;
 		}
 	}
+
+	@GetMapping("/whiskeyProfile/{whiskeyId}")
+	public ModelAndView whiskeyProfileHandler(@PathVariable(value="whiskeyId") int whiskeyId, HttpServletRequest request) {
+		ModelAndView mav = new ModelAndView();
+		System.out.println("MODEL AND VIEW CREATED");
+		System.out.println(request.getMethod());
+		System.out.println(whiskeyId);
+
+		mav.setViewName("whiskeyProfile");
+		mav.addObject(whiskeyService.getWhiskeyById(whiskeyId));
+		return mav;
+	}
+
 }
