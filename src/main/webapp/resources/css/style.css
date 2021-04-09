@@ -22,6 +22,12 @@ a {
   color: goldenrod;
 }
 
+hr {
+	border: none;
+	height: 1px;
+	background-color: goldenrod;
+}
+
 .search-result {
 	display: block;
 	width: 50%;
@@ -103,6 +109,10 @@ header.masthead h1 {
 
 .custom-btn {
   background-color: goldenrod;
+}
+
+nav .custom-btn {
+	margin: 5px;
 }
 
 .submit-btn {

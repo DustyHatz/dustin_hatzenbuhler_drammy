@@ -21,6 +21,24 @@ public class WhiskeyService {
 		return whiskey.orElse(null);
 	}
 	
+	public List<Whiskey> searchWhiskeyName(String name) {
+		List<Whiskey> whiskies = whiskeyRepository.findByNameContaining(name);
+		return whiskies;
+	}
+	
+	public void updateTastingNotes(int whiskeyId, String color, String nose, String palate, String finish) {
+		
+		Whiskey whiskey = whiskeyRepository.getOne(whiskeyId);
+		
+		whiskey.setColor(color);
+		whiskey.setNose(nose);
+		whiskey.setPalate(palate);
+		whiskey.setFinish(finish);
+		
+		whiskeyRepository.save(whiskey);
+		
+	}
+	
 //	public List<Whiskey> getAllWhiskeyByType(String type) {
 //		List<Whiskey> whiskies = whiskeyRepository.orderByType(type);
 //		return whiskies;
@@ -30,11 +48,5 @@ public class WhiskeyService {
 //		List<Whiskey> whiskies = whiskeyRepository.orderByDistillery(distillery);
 //		return whiskies;
 //	}
-	
-	public List<Whiskey> searchWhiskeyName(String name) {
-		List<Whiskey> whiskies = whiskeyRepository.findByNameContaining(name);
-		return whiskies;
-	}
-	
 	
 }

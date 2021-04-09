@@ -1,6 +1,8 @@
 package com.Drammy.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 import javax.servlet.http.HttpServletRequest;
@@ -13,6 +15,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.view.RedirectView;
 
 import com.Drammy.models.User;
 import com.Drammy.models.Whiskey;
@@ -41,6 +44,39 @@ public class TestController {
 		return "signIn";
 	}
 	
+	@GetMapping("/userProfile")
+	public ModelAndView userProfileHandler(HttpServletRequest request) {
+		ModelAndView mav = new ModelAndView();
+		
+		try {
+			// Get logged in user's (username)
+			String loggedUsername = (String) request.getSession().getAttribute("loggedInUser");
+			System.out.println("*----------"+loggedUsername+"----------*"); // Look into logger API
+			if(loggedUsername == "") {
+				mav.setViewName("error");
+				return mav;
+			}
+			User user = userService.getUserByUsername(loggedUsername);
+			if(user == null) {
+				// return model and view error, redirect to sign in
+				mav.setViewName("error");
+				return mav;
+				
+			} else {
+				mav.setViewName("userProfile");
+				mav.addObject(user);
+				mav.addObject("savedWhiskey", user.getSavedWhiskey());
+				mav.addObject("wantedWhiskey", user.getWantedWhiskey());
+				return mav;
+			}
+			
+		} catch(Exception e) {
+			System.out.println(e.getMessage());
+			mav.setViewName("error");
+			return mav;
+		}
+	}
+	
 	@RequestMapping("/logOut")
 	public String logOutHandler(HttpServletRequest request) {
 		request.getSession().setAttribute("loggedInUser", null);
@@ -57,12 +93,8 @@ public class TestController {
 		User user = userService.getUserByUsername(inputUsername);
 		
 		if (user != null && user.getUsername().equals(inputUsername) && user.getPassword().equals(inputPassword)) {
-			mav.setViewName("userProfile");
-			mav.addObject(user);
-			mav.addObject("savedWhiskey", user.getSavedWhiskey());
-			mav.addObject("wantedWhiskey", user.getWantedWhiskey());
+			mav.setViewName("redirect:/userProfile");
 			request.getSession().setAttribute("loggedInUser", user.getUsername());
-			//currentUser = user;
 			return mav;
 			
 		} else {
@@ -81,20 +113,23 @@ public class TestController {
 	public ModelAndView createAccountHandler(HttpServletRequest request) {
 		ModelAndView mav = new ModelAndView();
 		
-		if (request.getMethod().equals("POST")) {
-			mav.setViewName("signIn");
+		if (!userService.existsById(request.getParameter("username"))) {
 			User user = new User(
 					request.getParameter("username"),
 					request.getParameter("firstName"),
 					request.getParameter("lastName"),
 					request.getParameter("password"));
 			userService.addUser(user);
+			mav.setViewName("redirect:/signIn");
 			return mav;
 		} else {
-			
+			// Create empty error object to test in jsp page
+			Map<String, Object> error = new HashMap<String, Object>();
 			mav.setViewName("register");
+			mav.addObject("error", error);
 			return mav;
 		}
+		
 	}
 
 	@RequestMapping(value="/search", method= {RequestMethod.POST, RequestMethod.GET})
@@ -119,7 +154,7 @@ public class TestController {
 		}
 	}
 	
-	@RequestMapping(value="/saveWhiskey", method= {RequestMethod.POST, RequestMethod.GET})
+	@RequestMapping(value="/saveWhiskey", method={RequestMethod.POST, RequestMethod.GET})
 	public ModelAndView saveWhiskeyHandler(HttpServletRequest request) {
 		ModelAndView mav = new ModelAndView();
 		System.out.println("*----------ModelAndView Created----------*");
@@ -210,6 +245,49 @@ public class TestController {
 			return mav;
 		}
 	}
+	
+	@RequestMapping(value="/moveWhiskey/{whiskeyId}", method={RequestMethod.POST, RequestMethod.GET})
+	public ModelAndView moveWhiskeyHandler(@PathVariable(value="whiskeyId") int whiskeyId, HttpServletRequest request) {
+		ModelAndView mav = new ModelAndView();
+		System.out.println("*----------ModelAndView Created----------*");
+		System.out.println("*----------"+request.getMethod()+"----------*");
+		
+		if (request.getMethod().equals("GET")) {
+			
+			try {
+				// Get logged in user's (username)
+				String loggedUsername = (String) request.getSession().getAttribute("loggedInUser");
+				System.out.println("*----------"+loggedUsername+"----------*");
+				if(loggedUsername == "") {
+					mav.setViewName("error");
+					return mav;
+				}
+				User user = userService.getUserByUsername(loggedUsername);
+				if(user == null) {
+					// return model and view error, redirect to sign in
+					mav.setViewName("error");
+					return mav;
+				} else {
+					/*-------------------Save Selected Whiskey-------------------*/
+					System.out.println("*----------"+whiskeyId+"----------*");
+					Whiskey whiskeyToMove = whiskeyService.getWhiskeyById(whiskeyId);
+					userService.updateSavedWhiskey(loggedUsername, whiskeyToMove);
+					userService.deleteWantedWhiskey(loggedUsername, whiskeyToMove);
+					/*-------------------Display Saved Whiskey-------------------*/
+					mav.setViewName("redirect:/userProfile");			
+					return mav;
+				}
+			} catch(Exception e) {
+				mav.setViewName("signIn");
+				System.out.println(e.getMessage());
+				return mav;
+			}
+			
+		} else {
+			mav.setViewName("error");
+			return mav;
+		}
+	}
 
 	@GetMapping("/whiskeyProfile/{whiskeyId}")
 	public ModelAndView whiskeyProfileHandler(@PathVariable(value="whiskeyId") int whiskeyId, HttpServletRequest request) {
@@ -223,4 +301,96 @@ public class TestController {
 		return mav;
 	}
 
+	@RequestMapping(value="/saveNotes", method={RequestMethod.POST, RequestMethod.GET})
+	public ModelAndView saveNotesHandler(HttpServletRequest request) {
+		ModelAndView mav = new ModelAndView();
+		System.out.println("-------------Model And View Created------------------");
+		if (request.getMethod().equals("POST")) {
+			
+			try {
+				// Get logged in user's (username)
+				String loggedUsername = (String) request.getSession().getAttribute("loggedInUser");
+				System.out.println("*----------"+loggedUsername+"----------*");
+				if(loggedUsername == "") {
+					//throws(dustinError)
+					mav.setViewName("error");
+					return mav;
+				}
+				User user = userService.getUserByUsername(loggedUsername);
+				if(user == null) {
+					// return model and view error, redirect to sign in
+					mav.setViewName("error");
+					return mav;
+				} else {
+					/*-------------------Save Tasting Notes-------------------*/
+					int whiskeyId = Integer.parseInt(request.getParameter("whiskeyId"));
+					Whiskey whiskey = whiskeyService.getWhiskeyById(whiskeyId);
+					String color = request.getParameter("color");
+					String nose = request.getParameter("nose");
+					String palate = request.getParameter("palate");
+					String finish = request.getParameter("finish");
+					System.out.println("*----------"+whiskeyId+"----------*");
+					whiskeyService.updateTastingNotes(whiskeyId, color, nose, palate, finish);
+					/*-------------------Display Updated Tasting Notes-------------------*/
+					mav.setViewName("redirect:/whiskeyProfile/"+whiskeyId);
+					System.out.println(whiskey);
+					mav.addObject(whiskey);
+					return mav;
+				}
+			} catch(Exception e) {
+				mav.setViewName("signIn");
+				System.out.println(e.getMessage());
+				return mav;
+			}
+			
+		} else {
+			mav.setViewName("error");
+			return mav;
+		}
+		
+	}
+
+	@RequestMapping(value="/deleteSavedWhiskey/{whiskeyId}", method={RequestMethod.POST, RequestMethod.GET})
+	public ModelAndView deleteSavedWhiskeyHandler(@PathVariable(value="whiskeyId") int whiskeyId, HttpServletRequest request) {
+		ModelAndView mav = new ModelAndView();
+		System.out.println("*----------ModelAndView Created----------*");
+		System.out.println("*----------"+request.getMethod()+"----------*");
+		
+		if (request.getMethod().equals("GET")) {
+			
+			try {
+				// Get logged in user's (username)
+				String loggedUsername = (String) request.getSession().getAttribute("loggedInUser");
+				System.out.println("*----------"+loggedUsername+"----------*");
+				if(loggedUsername == "") {
+					mav.setViewName("error");
+					return mav;
+				}
+				User user = userService.getUserByUsername(loggedUsername);
+				if(user == null) {
+					// return model and view error, redirect to sign in
+					mav.setViewName("error");
+					return mav;
+				} else {
+					/*-------------------Delete Whiskey From Saved-------------------*/
+					//int whiskeyId = Integer.parseInt(request.getParameter("whiskeyId"));
+					System.out.println("*----------"+whiskeyId+"----------*");
+					Whiskey whiskeyToDelete = whiskeyService.getWhiskeyById(whiskeyId);
+					userService.deleteSavedWhiskey(loggedUsername, whiskeyToDelete);
+					System.out.println("*----------"+whiskeyToDelete+" Deleted----------*");
+					/*-------------------Display Saved Whiskey-------------------*/
+					mav.setViewName("redirect:/userProfile");
+					return mav;
+				}
+			} catch(Exception e) {
+				mav.setViewName("signIn");
+				System.out.println(e.getMessage());
+				return mav;
+			}
+			
+		} else {
+			mav.setViewName("error");
+			return mav;
+		}
+	}
 }

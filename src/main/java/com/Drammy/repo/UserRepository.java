@@ -15,7 +15,8 @@ public interface UserRepository extends JpaRepository<User, String> {
 //	
 //	User getUserByUsername(String username);
 //	
-	void deleteByUsername(String username);
+    void deleteByUsername(String username);
+    
 //	
 //	//void changePassword(String username);
 //	

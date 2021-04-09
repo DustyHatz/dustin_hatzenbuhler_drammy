@@ -57,5 +57,34 @@ public class UserService {
 		
 	}
 	
+	public void deleteWantedWhiskey(String username, Whiskey whiskey) {
+		
+		User user = userRepository.getOne(username);
+		
+		List<Whiskey> currentWantedWhiskey = user.getWantedWhiskey();
+		currentWantedWhiskey.remove(whiskey);
+		user.setWantedWhiskey(currentWantedWhiskey);
+		
+		userRepository.save(user);
+		
+	}
+	
+	public void deleteSavedWhiskey(String username, Whiskey whiskey) {
+		
+		User user = userRepository.getOne(username);
+		
+		List<Whiskey> currentSavedWhiskey = user.getSavedWhiskey();
+		currentSavedWhiskey.remove(whiskey);
+		user.setSavedWhiskey(currentSavedWhiskey);
+		
+		userRepository.save(user);
+		
+	}
+
+	public boolean existsById(String username) {
+		
+		return userRepository.existsById(username);
+	}
+	
 	
 }

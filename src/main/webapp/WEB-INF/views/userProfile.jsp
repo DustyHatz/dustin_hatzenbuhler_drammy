@@ -103,6 +103,7 @@
             <th scope="col">Whiskey</th>
             <th scope="col">Distillery</th>
             <th scope="col">Type</th>
+            <th scope="col"></th>
           </tr>
         </thead>
         <tbody>
@@ -111,6 +112,7 @@
 	            <td>${whiskey.name}</td>
 	            <td>${whiskey.distillery}</td>
 	            <td>${whiskey.type}</td>
+	            <td><a href="/Drammy/moveWhiskey/${whiskey.whiskeyId}">Taste</a></td>
 	          </tr>
         	</c:forEach>
         </tbody>

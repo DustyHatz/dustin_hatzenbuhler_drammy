@@ -37,9 +37,10 @@
 	<!-- Navigation -->
 	<nav class="navbar navbar-light bg-dark static-top">
 	
-		<div class="container">
-			<a class="navbar-brand text-light" href="/Drammy">Drammy</a>
-			<a class="btn text-white custom-btn" href="/Drammy/logOut">Log Out</a> 
+		<div class="container d-flex">
+			<a class="navbar-brand text-light mr-auto p-2" href="/Drammy">Drammy</a>
+			<a class="btn text-white custom-btn p-2" href="/Drammy/userProfile">Profile</a> 
+			<a class="btn text-white custom-btn p-2" href="/Drammy/logOut">Log Out</a> 
 		</div>
 
 	</nav>
@@ -52,31 +53,33 @@
 	      		<div class="row">
 		        	<div class="col-lg-4">
 		          		<div class="testimonial-item mx-auto mb-5 mb-lg-0">
-		            		<img class="img-fluid rounded-circle mb-3" src="${whiskey.imageUrl}" data-holder-rendered="true" alt="">
+		            		<img class="img-fluid mb-3" src="${whiskey.imageUrl}" data-holder-rendered="true" alt="">
 		            		<h5>${whiskey.name}</h5>
 		            		<p class="font-weight-light mb-0">${whiskey.description}</p>
+		            		<a class="btn btn-sm text-white btn-danger" href="/Drammy/deleteSavedWhiskey/${whiskey.whiskeyId}">Delete</a> 
 		          		</div>
 		        	</div>
 		        	<div class="col-lg-6 tasting-notes-container">
 		        		<h3>Tasting Notes</h3>
 		        		<hr>
-		        		<form action="saveNotes" method="POST" id="tasting-form">
+		        		<form action="/Drammy/saveNotes" method="POST" id="tasting-form">
  			        		<div class="tasting-category top">
-			        			<h5>Color</h5>
+			        			<h5>- Color -</h5>
 			        			<textarea class="form-control tasting-input" name="color" form="tasting-form" rows="2">${whiskey.color}</textarea>
 			        		</div>
 			        		<div class="tasting-category">
-			        			<h5>Nose</h5>
+			        			<h5>- Nose -</h5>
 			        			<textarea class="form-control tasting-input" name="nose" form="tasting-form" rows="2">${whiskey.nose}</textarea>
 			        		</div>
 			        		<div class="tasting-category">
-			        			<h5>Palate</h5>
+			        			<h5>- Palate -</h5>
 			        			<textarea class="form-control tasting-input" name="palate" form="tasting-form" rows="2">${whiskey.palate}</textarea>
 			        		</div>
 			        		<div class="tasting-category">
-			        			<h5>Finish</h5>
+			        			<h5>- Finish -</h5>
 			        			<textarea class="form-control tasting-input" name="finish" form="tasting-form" rows="2">${whiskey.finish}</textarea>
 			        		</div>
+			        		<input type="hidden" name="whiskeyId" value="${whiskey.whiskeyId}">
 			        		
 			        		<button type="submit" class="btn btn-sm text-white submit-btn">Save</button>
 			        	</form>
