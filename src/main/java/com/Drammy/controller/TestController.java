@@ -15,19 +15,16 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.view.RedirectView;
 
+import com.Drammy.exception.UsernameAlreadyExistsException;
 import com.Drammy.models.User;
 import com.Drammy.models.Whiskey;
-import com.Drammy.repo.UserRepository;
 import com.Drammy.service.UserService;
 import com.Drammy.service.WhiskeyService;
 
 @Controller
 public class TestController {
-	
-//	User currentUser = new User();
-	
+		
 	@Autowired
 	UserService userService;
 	@Autowired
@@ -40,8 +37,9 @@ public class TestController {
 	}
 	
 	@RequestMapping("/signIn")
-	public String signIn() {
-		return "signIn";
+	public ModelAndView signInHandler() {
+		ModelAndView mav = new ModelAndView("redirect:/signIn");
+		return mav;
 	}
 	
 	@GetMapping("/userProfile")
@@ -78,9 +76,11 @@ public class TestController {
 	}
 	
 	@RequestMapping("/logOut")
-	public String logOutHandler(HttpServletRequest request) {
+	public ModelAndView logOutHandler(HttpServletRequest request) {
+		// End user session and return to home screen
 		request.getSession().setAttribute("loggedInUser", null);
-		return "redirect:/";
+		ModelAndView mav = new ModelAndView("redirect:/");
+		return mav;
 	}
 	
 	@PostMapping("/signInAttempt")
@@ -98,7 +98,7 @@ public class TestController {
 			return mav;
 			
 		} else {
-			mav.setViewName("signIn");
+			mav.setViewName("redirect:/signIn");
 			return mav;
 		}
 	}
@@ -110,7 +110,7 @@ public class TestController {
 	}
 	
 	@RequestMapping(value="/createAccount", method= {RequestMethod.POST, RequestMethod.GET})
-	public ModelAndView createAccountHandler(HttpServletRequest request) {
+	public ModelAndView createAccountHandler(HttpServletRequest request) throws UsernameAlreadyExistsException {
 		ModelAndView mav = new ModelAndView();
 		
 		if (!userService.existsById(request.getParameter("username"))) {
@@ -123,33 +123,42 @@ public class TestController {
 			mav.setViewName("redirect:/signIn");
 			return mav;
 		} else {
-			// Create empty error object to test in jsp page
-			Map<String, Object> error = new HashMap<String, Object>();
 			mav.setViewName("register");
-			mav.addObject("error", error);
-			return mav;
+			//Map<String, Object> error = new HashMap<String, Object>();
+			mav.addObject("usernameAlreadyExists", "*Username Already Exists");
+			// Custom Exception
+			try {
+				throw new UsernameAlreadyExistsException("Username Already Exists");
+			} catch (UsernameAlreadyExistsException e) {
+				e.printStackTrace();
+				return mav;
+			}
+			
 		}
 		
 	}
 
 	@RequestMapping(value="/search", method= {RequestMethod.POST, RequestMethod.GET})
 	public ModelAndView searchHandler(HttpServletRequest request) {
+		
 		ModelAndView mav = new ModelAndView("whiskeyResults");
 		if (request.getMethod().equals("POST")) {
-		
+			List<Whiskey> results;
 			String searchTerm = request.getParameter("search");
 			System.out.println(searchTerm);
 			
 			if (!searchTerm.equals("")) {
-				List<Whiskey> results = whiskeyService.searchWhiskeyName(searchTerm);
+			  results = whiskeyService.searchWhiskeyName(searchTerm);
 				mav.addObject("results", results);
 				return mav;
 			} else {
+				results = null;
+				mav.addObject("results", results);
 				return mav;
 			}
 			
 		} else {
-			mav.setViewName("/index");
+			mav.setViewName("error");
 			return mav;
 		}
 	}
@@ -157,15 +166,12 @@ public class TestController {
 	@RequestMapping(value="/saveWhiskey", method={RequestMethod.POST, RequestMethod.GET})
 	public ModelAndView saveWhiskeyHandler(HttpServletRequest request) {
 		ModelAndView mav = new ModelAndView();
-		System.out.println("*----------ModelAndView Created----------*");
-		System.out.println("*----------"+request.getMethod()+"----------*");
 		
 		if (request.getMethod().equals("POST")) {
 			
 			try {
 				// Get logged in user's (username)
 				String loggedUsername = (String) request.getSession().getAttribute("loggedInUser");
-				System.out.println("*----------"+loggedUsername+"----------*");
 				if(loggedUsername == "") {
 					mav.setViewName("error");
 					return mav;
@@ -176,16 +182,14 @@ public class TestController {
 					mav.setViewName("error");
 					return mav;
 				} else {
+					
 					/*-------------------Save Selected Whiskey-------------------*/
 					int whiskeyId = Integer.parseInt(request.getParameter("whiskeyId"));
-					System.out.println("*----------"+whiskeyId+"----------*");
 					Whiskey whiskeyToSave = whiskeyService.getWhiskeyById(whiskeyId);
 					userService.updateSavedWhiskey(loggedUsername, whiskeyToSave);
-					/*-------------------Display Saved Whiskey-------------------*/
-					mav.setViewName("userProfile");
-					mav.addObject(user);
-					mav.addObject("savedWhiskey", user.getSavedWhiskey());
-					mav.addObject("wantedWhiskey", user.getWantedWhiskey());
+					
+					/*-------------------Display User Profile with Saved Whiskey-------------------*/
+					mav.setViewName("redirect:/userProfile");
 					return mav;
 				}
 			} catch(Exception e) {

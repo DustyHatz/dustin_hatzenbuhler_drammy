@@ -73,7 +73,7 @@
 	<section class="search-results bg-dark text-center"
 		style="background-image: url();">
 		<div class="container">
-			<span class="font-italic font custom-span">Search found ${results.size()} results...</span>
+			<span class="font-italic font custom-span">Search found ${results != null? results.size(): 0} results...</span>
 		</div>
 	</section>
 	

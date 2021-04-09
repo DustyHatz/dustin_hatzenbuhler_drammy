@@ -78,9 +78,9 @@
 			<div class="row">
 				<div class="col-xl-9 mx-auto">
 					<h1 class="mb-5">Create account...</h1>
-					<c:if test="${error != null}">
+					<%-- <c:if test="${error != null}">
 						<p>*Username already taken...</p>
-					</c:if>
+					</c:if> --%>
 				</div>
 				<div class="col-md-10 col-lg-8 col-xl-7 mx-left">
 					<form class="needs-validation" action="/Drammy/createAccount" method="POST" novalidate
@@ -98,6 +98,7 @@
 							</div>
 							<label for="userName">Username*</label> <input type="text" class="form-control" name="username" id="userName" placeholder="Create username..." required maxlength="20">
 							<div class="invalid-feedback">Please enter a Username</div>
+							<div class="invalid-feedback">${usernameAlreadyExists}</div>
 							<small id="usernameHelp" class="form-text text-light">*Limit 20 characters</small>
 						</div>
 						<div class="form-row">

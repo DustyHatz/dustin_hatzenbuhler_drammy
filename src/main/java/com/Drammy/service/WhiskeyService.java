@@ -6,7 +6,6 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.Drammy.models.User;
 import com.Drammy.models.Whiskey;
 import com.Drammy.repo.WhiskeyRepository;
 
@@ -38,15 +37,5 @@ public class WhiskeyService {
 		whiskeyRepository.save(whiskey);
 		
 	}
-	
-//	public List<Whiskey> getAllWhiskeyByType(String type) {
-//		List<Whiskey> whiskies = whiskeyRepository.orderByType(type);
-//		return whiskies;
-//	}
-	
-//	public List<Whiskey> getAllWhiskeyFromDistillery(String distillery) {
-//		List<Whiskey> whiskies = whiskeyRepository.orderByDistillery(distillery);
-//		return whiskies;
-//	}
 	
 }
