@@ -47,7 +47,7 @@
 	</nav>
 
 	<!-- Masthead -->
-	<header class="masthead text-white text-left masthead-image" style="background-image: url('<%=request.getContextPath()%>/resources/images/tasting_glass.jpeg');">
+	<header class="masthead text-white text-left masthead-image" style="background-image: url('<%=request.getContextPath()%>/resources/images/spilled_whiskey.jpeg');">
 		<div class="overlay"></div>
 		<div class="container">
 			<div class="row">
@@ -61,6 +61,15 @@
 			</div>
 		</div>
 	</header>
+	
+	  <!-- Footer -->
+	<footer>
+		<jsp:include page="footer.jsp"/>
+	</footer>
+
+  <!-- Bootstrap core JavaScript -->
+  <script src="vendor/jquery/jquery.min.js"></script>
+  <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
 </body>
 

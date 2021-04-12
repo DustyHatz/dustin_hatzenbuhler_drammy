@@ -38,9 +38,7 @@
 		<div class="container">
 			<a class="navbar-brand text-light" href="/Drammy">Drammy</a>
 			<a class="btn text-white custom-btn" href="/Drammy/signIn">Sign In</a>
-			<!-- <a class="btn text-white custom-btn" href="/Drammy/register">Create Account</a> -->
 		</div>
-
 	</nav>
 
 	<!-- Masthead -->
@@ -80,33 +78,29 @@
 	<!-- Search Results -->
 	<div class="album py-5 bg-white">
     <div class="container">
-    	
-	      <div class="row">
-	      	<%-- <c:if test="${results.size() > 1}"> --%>
-			  <c:forEach items="${results}" var="result">
-		        <div class="col-md-4">
-		          <div class="card mb-3 box-shadow bg-light">
-		            <img class="card-img-top search-result" alt="${result.name} thumbnail" src="${result.imageUrl}" data-holder-rendered="true">
-		            <div class="card-body">
-		            <h5 class="card-title">${result.name}</h5>
-		              <p class="card-text">${result.distillery}</p>
-		              <div class="d-flex justify-content-between align-items-center">
-		                <div class="btn-group">
-		                  <form action="/Drammy/saveWhiskey" method="POST">
-	                		<input type="hidden" name="whiskeyId" value="${result.whiskeyId}">
-	                  		<button type="submit" class="btn btn-sm btn-outline-secondary">Save</button>
-	                  		<button type="submit" class="btn btn-sm btn-outline-secondary" formaction="/Drammy/wantWhiskey">Want</button>
-		                  </form>
-		                </div>
-		                <small class="text-muted">${result.type}</small>
-		              </div>
-		            </div>
-		          </div>
-		        </div>
-		      </c:forEach>
-	     		<%-- </c:if> --%>
-	      </div>
-	     
+      <div class="row">
+		  <c:forEach items="${results}" var="result">
+	        <div class="col-md-4">
+	          <div class="card mb-3 box-shadow bg-light">
+	            <img class="card-img-top search-result" alt="${result.name} thumbnail" src="${result.imageUrl}" data-holder-rendered="true">
+	            <div class="card-body">
+	            <h5 class="card-title">${result.name}</h5>
+	              <p class="card-text">${result.distillery}</p>
+	              <div class="d-flex justify-content-between align-items-center">
+	                <div class="btn-group">
+	                  <form action="/Drammy/saveWhiskey" method="POST">
+	               		<input type="hidden" name="whiskeyId" value="${result.whiskeyId}">
+	                 		<button type="submit" class="btn btn-sm btn-outline-secondary">Save</button>
+	                 		<button type="submit" class="btn btn-sm btn-outline-secondary" formaction="/Drammy/wantWhiskey">Want</button>
+	                  </form>
+	                </div>
+	                <small class="text-muted">${result.type}</small>
+	              </div>
+	            </div>
+	          </div>
+	        </div>
+	      </c:forEach>
+      </div>
     </div>
   </div>
 

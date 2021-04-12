@@ -40,7 +40,7 @@
 	<nav class="navbar navbar-light bg-dark static-top">
 	
 		<div class="container">
-			<a class="navbar-brand text-light" href="/Drammy">Drammy</a>
+			<a class="navbar-brand text-light" href="/Drammy/userProfile">Drammy</a>
 			<a class="btn text-white custom-btn" href="/Drammy/logOut">Log Out</a> 
 		</div>
 

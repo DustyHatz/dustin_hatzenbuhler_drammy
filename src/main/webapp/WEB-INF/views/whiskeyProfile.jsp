@@ -34,7 +34,6 @@
 <body>
 
 	<!-- Navigation -->
-	<!-- Navigation -->
 	<nav class="navbar navbar-light bg-dark static-top">
 	
 		<div class="container d-flex">
@@ -87,20 +86,6 @@
 		        </div>
 	    	</div>
 	</header>
-	
-	
-  
-  <%-- 		<div class="container">
-			<div class="row">
-				<div class="col-xl-9 mx-auto">
-					<img class="whiskey-profile-image" alt="${whiskey.name} thumbnail" src="${whiskey.imageUrl}" data-holder-rendered="true">
-					<h1 class="mb-5">${whiskey.name}</h1>
-				</div>
-				<div class="col-md-10 col-lg-8 col-xl-7 mx-left">
-				</div>
-			</div>
-		</div> --%>
-
 
 	<!-- Footer -->
 	<footer>

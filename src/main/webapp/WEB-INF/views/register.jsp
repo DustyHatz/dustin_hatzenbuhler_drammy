@@ -78,9 +78,6 @@
 			<div class="row">
 				<div class="col-xl-9 mx-auto">
 					<h1 class="mb-5">Create account...</h1>
-					<%-- <c:if test="${error != null}">
-						<p>*Username already taken...</p>
-					</c:if> --%>
 				</div>
 				<div class="col-md-10 col-lg-8 col-xl-7 mx-left">
 					<form class="needs-validation" action="/Drammy/createAccount" method="POST" novalidate
@@ -98,8 +95,8 @@
 							</div>
 							<label for="userName">Username*</label> <input type="text" class="form-control" name="username" id="userName" placeholder="Create username..." required maxlength="20">
 							<div class="invalid-feedback">Please enter a Username</div>
-							<div class="invalid-feedback">${usernameAlreadyExists}</div>
 							<small id="usernameHelp" class="form-text text-light">*Limit 20 characters</small>
+							<p class="text-danger">${usernameAlreadyExists}</p>
 						</div>
 						<div class="form-row">
 							<div class="form-group col-md-6">
@@ -138,8 +135,8 @@
 
         <div class="col-lg-6 order-lg-2 text-white showcase-img" style="background-image: url('<%=request.getContextPath()%>/resources/images/pot_still.jpeg');"></div>
         <div class="col-lg-6 order-lg-1 my-auto showcase-text">
-          <h2>All Scotch is whiskey...</h2>
-          <p class="lead mb-0">...but not all whiskey is Scotch. Scotch is but one variation of whiskey. Other styles of whiskey include, Bourbon, Irish, Canadian, Japenese, and many more!</p>
+          <h2>Is Bourbon whiskey?...</h2>
+          <p class="lead mb-0">Yes, all bourbon is whiskey but not all whiskey is bourbon. Bourbon is but one type of whiskey. Other types of whiskey include, Scotch, Rye, Irish, Japenese, and many more!</p>
         </div>
       </div>
       <div class="row no-gutters">
