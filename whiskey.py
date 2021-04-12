@@ -16,7 +16,7 @@ def main(args):
   request_headers = {'Cookie': '__cfduid=d7900bfd5f29e00b01842c7c91b3097e61616091696; sailthru_hid=afec58eeea1f3291c4228781324ed2cb60539bcef44c000cc555c9561ceaaa9b23e52428846ea20341df1433; flaviaruid=MzUwODM1NixhbGV4LmhhdHp6MTFAZ21haWwuY29tLDIwMjEtMDMtMThmTCpTNSM; flaviardft=odmv93j0u9p540moargjat9od4'}
 
 
-  # get every two letter combo
+  # get every three letter combo
   alpha = string.ascii_lowercase
   combos = [val1+val2+val3 for val1 in alpha for val2 in alpha for val3 in alpha]
 
