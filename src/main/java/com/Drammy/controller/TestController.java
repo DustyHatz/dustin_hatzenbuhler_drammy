@@ -39,6 +39,8 @@ public class TestController {
 		return mav;
 	}
 	
+	/*------------------------User Handlers--------------------------*/
+	
 	@GetMapping("/userProfile")
 	public ModelAndView userProfileHandler(HttpServletRequest request) {
 		ModelAndView mav = new ModelAndView();
@@ -156,6 +158,8 @@ public class TestController {
 		
 	}
 
+	/*------------------------Whiskey Handlers--------------------------*/
+	
 	@RequestMapping(value="/search", method= {RequestMethod.POST, RequestMethod.GET})
 	public ModelAndView searchHandler(HttpServletRequest request) {
 		
