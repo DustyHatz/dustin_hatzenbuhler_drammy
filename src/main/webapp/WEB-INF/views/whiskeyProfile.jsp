@@ -37,9 +37,9 @@
 	<nav class="navbar navbar-light bg-dark static-top">
 	
 		<div class="container d-flex">
-			<a class="navbar-brand text-light mr-auto p-2" href="/Drammy">Drammy</a>
-			<a class="btn text-white custom-btn p-2" href="/Drammy/userProfile">Profile</a> 
-			<a class="btn text-white custom-btn p-2" href="/Drammy/logOut">Log Out</a> 
+			<a class="navbar-brand text-light mr-auto p-2" href="/">Drammy</a>
+			<a class="btn text-white custom-btn p-2" href="/userProfile">Profile</a> 
+			<a class="btn text-white custom-btn p-2" href="/logOut">Log Out</a> 
 		</div>
 
 	</nav>
@@ -55,13 +55,13 @@
 		            		<img class="img-fluid mb-3" src="${whiskey.imageUrl}" data-holder-rendered="true" alt="">
 		            		<h5>${whiskey.name}</h5>
 		            		<p class="font-weight-light mb-0">${whiskey.description}</p>
-		            		<a class="btn btn-sm text-white btn-danger" href="/Drammy/deleteSavedWhiskey/${whiskey.whiskeyId}">Delete</a> 
+		            		<a class="btn btn-sm text-white btn-danger" href="/deleteSavedWhiskey/${whiskey.whiskeyId}">Delete</a> 
 		          		</div>
 		        	</div>
 		        	<div class="col-lg-6 tasting-notes-container">
 		        		<h3>Tasting Notes</h3>
 		        		<hr>
-		        		<form action="/Drammy/saveNotes" method="POST" id="tasting-form">
+		        		<form action="/saveNotes" method="POST" id="tasting-form">
  			        		<div class="tasting-category top">
 			        			<h5>- On The Eyes -</h5>
 			        			<textarea class="form-control tasting-input" name="color" form="tasting-form" rows="2">${whiskey.color}</textarea>

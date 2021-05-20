@@ -14,8 +14,8 @@
 						<li class="list-inline-item">&sdot;</li>
 						<li class="list-inline-item"><a href="#">Privacy Policy</a></li>
 					</ul>
-					<p class="text-muted small mb-4 mb-lg-0">&copy; Dustin
-						Hatzenbuhler - 2021</p>
+					<p class="text-muted small mb-4 mb-lg-0">&copy; <a href="http://www.tinyurl.com/dustyhatz">Dustin
+						Hatzenbuhler - 2021</a></p>
 				</div>
 				<div class="col-lg-6 h-100 text-center text-lg-right my-auto">
 					<ul class="list-inline mb-0">

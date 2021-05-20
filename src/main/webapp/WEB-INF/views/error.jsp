@@ -39,8 +39,8 @@
 	<nav class="navbar navbar-light bg-dark static-top">
 	
 		<div class="container">
-			<a class="navbar-brand text-light" href="/Drammy">Drammy</a>
-			<a class="btn text-white custom-btn" href="/Drammy/signIn">Sign In</a>
+			<a class="navbar-brand text-light" href="/">Drammy</a>
+			<a class="btn text-white custom-btn" href="/signIn">Sign In</a>
 			<!-- <a class="btn text-white custom-btn" href="/Drammy/register">Create Account</a> -->
 		</div>
 

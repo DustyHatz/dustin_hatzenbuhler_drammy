@@ -40,8 +40,8 @@
 	<nav class="navbar navbar-light bg-dark static-top">
 	
 		<div class="container">
-			<a class="navbar-brand text-light" href="/Drammy/userProfile">Drammy</a>
-			<a class="btn text-white custom-btn" href="/Drammy/logOut">Log Out</a> 
+			<a class="navbar-brand text-light" href="/userProfile">Drammy</a>
+			<a class="btn text-white custom-btn" href="/logOut">Log Out</a> 
 		</div>
 
 	</nav>
@@ -87,7 +87,7 @@
         <tbody>
         	<c:forEach items="${savedWhiskey}" var="whiskey">
 	          <tr>
-	            <td><a href="/Drammy/whiskeyProfile/${whiskey.whiskeyId}">${whiskey.name}</a></td>
+	            <td><a href="/whiskeyProfile/${whiskey.whiskeyId}">${whiskey.name}</a></td>
 	            <td>${whiskey.distillery}</td>
 	            <td>${whiskey.type}</td>
 	          </tr>
@@ -112,7 +112,7 @@
 	            <td>${whiskey.name}</td>
 	            <td>${whiskey.distillery}</td>
 	            <td>${whiskey.type}</td>
-	            <td><a href="/Drammy/moveWhiskey/${whiskey.whiskeyId}">Taste</a></td>
+	            <td><a href="/moveWhiskey/${whiskey.whiskeyId}">Taste</a></td>
 	          </tr>
         	</c:forEach>
         </tbody>

@@ -64,8 +64,8 @@
 	<nav class="navbar navbar-light bg-dark static-top">
 	
 		<div class="container">
-			<a class="navbar-brand text-light" href="/Drammy">Drammy</a>
-			<a class="btn text-white custom-btn" href="/Drammy/signIn">Sign In</a>
+			<a class="navbar-brand text-light" href="/">Drammy</a>
+			<a class="btn text-white custom-btn" href="/signIn">Sign In</a>
 			<!-- <a class="btn text-white custom-btn" href="/Drammy/register">Create Account</a> -->
 		</div>
 
@@ -80,7 +80,7 @@
 					<h1 class="mb-5">Create account...</h1>
 				</div>
 				<div class="col-md-10 col-lg-8 col-xl-7 mx-left">
-					<form class="needs-validation" action="/Drammy/createAccount" method="POST" novalidate
+					<form class="needs-validation" action="/createAccount" method="POST" novalidate
 						oninput='confirmPassword.setCustomValidity(confirmPassword.value != password.value ? "Passwords do not match." : "")'>
 						<div class="form-group">
 							<div class="form-row">

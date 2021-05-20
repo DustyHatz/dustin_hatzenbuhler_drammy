@@ -58,8 +58,8 @@
   <!-- Navigation -->
   <nav class="navbar navbar-light bg-dark static-top">
     <div class="container">
-      <a class="navbar-brand text-light" href="/Drammy">Drammy</a>
-      <a class="btn text-white custom-btn" href="/Drammy/register">Create Account</a>
+      <a class="navbar-brand text-light" href="/">Drammy</a>
+      <a class="btn text-white custom-btn" href="/register">Create Account</a>
     </div>
     
   </nav>
@@ -73,7 +73,7 @@
           <h1 class="mb-5">Sign in...</h1>
         </div>
         <div class="col-md-10 col-lg-8 col-xl-7 mx-left">
-          <form class="needs-validation" action="/Drammy/signInAttempt" method="POST" novalidate>
+          <form class="needs-validation" action="/signInAttempt" method="POST" novalidate>
             <div class="form-group">
               <label for="userName">Username*</label>
               <input type="text" class="form-control" name="username" id="userName" placeholder="Enter username..." required>
@@ -89,7 +89,7 @@
           </form>
           <hr class="btn-light">
           <p>Don't have an account?</p>
-          <a href="/Drammy/register"><button class="btn btn-dark custom-btn">Create Account</button></a>
+          <a href="/register"><button class="btn btn-dark custom-btn">Create Account</button></a>
         </div>
       </div>
     </div>

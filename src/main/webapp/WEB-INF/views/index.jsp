@@ -38,8 +38,8 @@
 	<nav class="navbar navbar-light bg-dark static-top">
 	
 		<div class="container">
-			<a class="navbar-brand text-light" href="/Drammy">Drammy</a>
-			<a class="btn text-white custom-btn" href="/Drammy/signIn">Sign In</a>
+			<a class="navbar-brand text-light" href="/">Drammy</a>
+			<a class="btn text-white custom-btn" href="/signIn">Sign In</a>
 		</div>
 
 	</nav>
@@ -53,7 +53,7 @@
 					<h1 class="mb-5">DRAMMY</h1>
 				</div>
 				<div class="col-md-10 col-lg-8 col-xl-7 mx-left">
-					<form action="/Drammy/search" method="POST">
+					<form action="/search" method="POST">
 						<div class="form-row">
 							<div class="col-12 col-md-6 mb-2 mb-md-0">
 								<input type="text" class="form-control form-control-lg" name="search"
